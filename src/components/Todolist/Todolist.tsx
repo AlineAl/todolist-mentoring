@@ -1,43 +1,75 @@
 import React from "react";
 import style from "../Todolist/todolist.module.css";
-import { ImPlus } from "react-icons/im";
-import { TodoType } from "../../types";
-import useCreate from "../../hooks/useCreate";
+import { ImMinus, ImPencil2, ImPlus } from "react-icons/im";
 import useRemove from "../../hooks/useRemove";
 import useUpdate from "../../hooks/useUpdate";
 import CardTodo from "../../common/cardTodo";
 
 export default function Todolist() {
-  const [id, setId] = React.useState(0);
-  const [todo, setTodo] = React.useState<TodoType>({ id: id, content: "" });
-  const [array, setArray] = React.useState<TodoType[]>([]);
+  const [todo, setTodo] = React.useState<string>("");
+  const [array, setArray] = React.useState<any[]>([]);
+  const [open, setOpen] = React.useState<boolean>(false);
 
-  const handleIncrement = () => {
-    setId(id + 1);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.target.value.length > 0 ? setTodo(e.target.value) : setTodo("");
   };
 
-  const handleChange = (e: { target: { value: string } }) => {
-    let content = e.target.value;
-    setTodo({ id: id, content });
+  const handleAdd = () => {
+    const id = array.length;
+    setArray([...array, { content: todo, id: id + 1 }]);
+    setTodo("");
+  };
+
+  const handleUpdate = (id: number, content: string) => {
+    const findTodo = array.find((item) => item.id === id);
+    findTodo.content = content;
+    setArray([...array]);
+    setOpen(false);
+  };
+
+  const handleRemove = (id: number) => {
+    const newArray = array.filter((el) => el.id !== id);
+    setArray([...newArray]);
   };
 
   return (
     <div className={style.container}>
       <h1>Todo List</h1>
       <div className={style.inputContainer}>
-        <input type="text" id="text" name="text" value={todo.content} onChange={handleChange} />
-        <ImPlus
-          onClick={() => useCreate({ todo, handleIncrement, setArray, setTodo, array, id })}
-        />
+        <input type="text" id="text" name="text" value={todo} onChange={handleChange} />
+        <ImPlus onClick={handleAdd} />
       </div>
 
-      <CardTodo
-        array={array}
-        todo={todo}
-        useRemove={useRemove}
-        setArray={setArray}
-        useUpdate={useUpdate}
-      />
+      <ul>
+        {array?.map((el) => {
+          return (
+            <li key={el.id}>
+              <span>{el.content}</span>
+              <ImMinus className={style.minIcon} onClick={() => handleRemove(el.id)} />
+              <ImPencil2 onClick={() => setOpen(true)} />
+              {open && (
+                <>
+                  <input
+                    type="text"
+                    id="update"
+                    name="update"
+                    value={todo}
+                    onChange={handleChange}
+                  />
+                  <button onClick={() => handleUpdate(el.id, todo)}>Modifier</button>
+                </>
+              )}
+            </li>
+            /*<CardTodo
+              todo={el.content}
+              id={el.id}
+              useRemove={useRemove}
+              setArray={setArray}
+              useUpdate={useUpdate}
+            />*/
+          );
+        })}
+      </ul>
     </div>
   );
 }

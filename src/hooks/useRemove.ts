@@ -1,8 +1,7 @@
 import React from "react";
-import { TodoType } from "../types";
 
 interface IUseRemove {
-  array: TodoType[];
+  array: any[];
   setArray: any;
   id: number;
 }

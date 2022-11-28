@@ -1,9 +1,8 @@
 import React from "react";
-import { TodoType } from "../types";
 
 interface IUseUpdate {
-  array: TodoType[];
-  todo: TodoType;
+  array: any[];
+  todo: any;
   setArray: any;
   id: number;
 }
