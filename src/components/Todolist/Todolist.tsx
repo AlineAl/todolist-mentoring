@@ -1,28 +1,23 @@
 import React from "react";
 import style from "../Todolist/todolist.module.css";
-import { ImMinus, ImPencil2, ImPlus } from "react-icons/im";
-import useRemove from "../../hooks/useRemove";
-import useUpdate from "../../hooks/useUpdate";
-import CardTodo from "../../common/cardTodo";
+import { ImPlus } from "react-icons/im";
+import { TodoType } from "../../types";
+import CardTodo from "../../common/CardTodo";
+import { handleAdd } from "../../handlers/handleAdd";
+import { handleUpdate } from "../../handlers/handleUpdate";
 
 export default function Todolist() {
   const [todo, setTodo] = React.useState<string>("");
-  const [array, setArray] = React.useState<any[]>([]);
+  const [array, setArray] = React.useState<TodoType[]>([]);
   const [open, setOpen] = React.useState<boolean>(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.target.value.length > 0 ? setTodo(e.target.value) : setTodo("");
   };
 
-  const handleAdd = () => {
-    const id = array.length;
-    setArray([...array, { content: todo, id: id + 1 }]);
-    setTodo("");
-  };
-
   const handleUpdate = (id: number, content: string) => {
-    const findTodo = array.find((item) => item.id === id);
-    findTodo.content = content;
+    const findTodo = array.find((item) => item?.id === id);
+    findTodo ? (findTodo.content = content) : null;
     setArray([...array]);
     setOpen(false);
   };
@@ -37,36 +32,21 @@ export default function Todolist() {
       <h1>Todo List</h1>
       <div className={style.inputContainer}>
         <input type="text" id="text" name="text" value={todo} onChange={handleChange} />
-        <ImPlus onClick={handleAdd} />
+        <ImPlus onClick={() => handleAdd({ array, setArray, todo, setTodo })} />
       </div>
 
       <ul>
         {array?.map((el) => {
           return (
-            <li key={el.id}>
-              <span>{el.content}</span>
-              <ImMinus className={style.minIcon} onClick={() => handleRemove(el.id)} />
-              <ImPencil2 onClick={() => setOpen(true)} />
-              {open && (
-                <>
-                  <input
-                    type="text"
-                    id="update"
-                    name="update"
-                    value={todo}
-                    onChange={handleChange}
-                  />
-                  <button onClick={() => handleUpdate(el.id, todo)}>Modifier</button>
-                </>
-              )}
-            </li>
-            /*<CardTodo
-              todo={el.content}
-              id={el.id}
-              useRemove={useRemove}
-              setArray={setArray}
-              useUpdate={useUpdate}
-            />*/
+            <CardTodo
+              el={el}
+              setOpen={setOpen}
+              open={open}
+              handleChange={handleChange}
+              handleRemove={handleRemove}
+              handleUpdate={handleUpdate}
+              todo={todo}
+            />
           );
         })}
       </ul>
