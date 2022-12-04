@@ -9,7 +9,7 @@ interface ICardTodo {
   open: boolean;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleRemove: (id: number) => void;
-  handleUpdate: (id: number, content: string) => void;
+  handleUpdate: (id: number, content: string, open: boolean) => void;
   todo: string;
 }
 
@@ -23,6 +23,7 @@ export default function CardTodo({
   todo,
 }: ICardTodo) {
   const [todoId, setTodoId] = useState<number>(0);
+
   return (
     <li key={el.id}>
       <span>{el.content}</span>
@@ -30,22 +31,21 @@ export default function CardTodo({
       <ImPencil2
         onClick={() => {
           setTodoId(el.id);
-          setOpen(true);
+          setOpen(!open);
         }}
       />
-      {open && todoId === el.id && (
+      {open && todoId === el.id ? (
         <>
           <input type="text" id="update" name="update" value={todo} onChange={handleChange} />
           <button
             onClick={() => {
-              handleUpdate(el.id, todo);
-              setOpen(false);
+              handleUpdate(el.id, todo, false);
             }}
           >
             Modifier
           </button>
         </>
-      )}
+      ) : null}
     </li>
   );
 }

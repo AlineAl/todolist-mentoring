@@ -5,15 +5,18 @@ interface IHandleUpdate {
   array: TodoType[];
   setArray: React.Dispatch<React.SetStateAction<TodoType[]>>;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  id: number;
+  value: string;
+  open: boolean;
 }
 
-export const handleUpdate = (
-  id: number,
-  content: string,
-  { array, setArray, setOpen }: IHandleUpdate
-) => {
-  const findTodo = array.find((item) => item?.id === id);
-  findTodo ? (findTodo.content = content) : null;
-  setArray([...array]);
-  setOpen(false);
+export const handleUpdate = ({ array, id, value, setArray, setOpen, open }: IHandleUpdate) => {
+  const newArray = array.map((item) => {
+    if (item.id === id) {
+      return { ...item, content: value };
+    }
+    return item;
+  });
+  setArray(newArray);
+  setOpen(open);
 };

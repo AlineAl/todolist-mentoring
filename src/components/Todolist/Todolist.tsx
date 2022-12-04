@@ -5,6 +5,7 @@ import { TodoType } from "../../types";
 import CardTodo from "../../common/CardTodo";
 import { handleAdd } from "../../handlers/handleAdd";
 import { handleUpdate } from "../../handlers/handleUpdate";
+import { handleRemove } from "../../handlers/handleRemove";
 
 export default function Todolist() {
   const [todo, setTodo] = React.useState<string>("");
@@ -13,18 +14,6 @@ export default function Todolist() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.target.value.length > 0 ? setTodo(e.target.value) : setTodo("");
-  };
-
-  const handleUpdate = (id: number, content: string) => {
-    const findTodo = array.find((item) => item?.id === id);
-    findTodo ? (findTodo.content = content) : null;
-    setArray([...array]);
-    setOpen(false);
-  };
-
-  const handleRemove = (id: number) => {
-    const newArray = array.filter((el) => el.id !== id);
-    setArray([...newArray]);
   };
 
   return (
@@ -43,8 +32,10 @@ export default function Todolist() {
               setOpen={setOpen}
               open={open}
               handleChange={handleChange}
-              handleRemove={handleRemove}
-              handleUpdate={handleUpdate}
+              handleRemove={() => handleRemove({ id: el.id, setArray, array })}
+              handleUpdate={() =>
+                handleUpdate({ array, id: el.id, value: todo, setArray, setOpen, open })
+              }
               todo={todo}
             />
           );
