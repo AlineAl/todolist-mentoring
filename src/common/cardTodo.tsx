@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ImMinus, ImPencil2 } from "react-icons/im";
 import { TodoType } from "../types";
 import style from "../components/Todolist/todolist.module.css";
@@ -24,6 +24,12 @@ export default function CardTodo({
 }: ICardTodo) {
   const [todoId, setTodoId] = useState<number>(0);
 
+  useEffect(() => {
+    if (!open) {
+      setTodoId(0);
+    }
+  }, [open]);
+
   return (
     <li key={el.id}>
       <span>{el.content}</span>
@@ -40,6 +46,7 @@ export default function CardTodo({
           <button
             onClick={() => {
               handleUpdate(el.id, todo, false);
+              setOpen(false);
             }}
           >
             Modifier

@@ -33,9 +33,7 @@ export default function Todolist() {
               open={open}
               handleChange={handleChange}
               handleRemove={() => handleRemove({ id: el.id, setArray, array })}
-              handleUpdate={() =>
-                handleUpdate({ array, id: el.id, value: todo, setArray, setOpen, open })
-              }
+              handleUpdate={() => handleUpdate({ array, id: el.id, value: todo, setArray })}
               todo={todo}
             />
           );
