@@ -3,7 +3,7 @@ import { TodoType } from "../types";
 
 interface IHandleUpdate {
   setTodos: React.Dispatch<React.SetStateAction<TodoType[]>>;
-  id: number;
+  id: string;
   value: string;
 }
 

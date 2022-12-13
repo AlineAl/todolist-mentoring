@@ -1,16 +1,53 @@
 .listContainer {
   list-style: none;
-  border-bottom: 1px solid #aaeafd;
-  width: 100%;
+  border: #aaeafd;
+  border-top: 1px solid #aaeafd;
   padding: 2rem 1rem;
+  transition: all 0.3s ease-in-out;
 }
 
 .listContainer:last-child {
   border-bottom: none;
+  border: #aaeafd;
+  margin-bottom: 1.5rem;
+}
+
+.listContainer:hover .minIcon {
+  display: block;
+}
+
+.listContainer:hover .pencilIcon {
+  display: block;
+}
+
+.listContainer:hover {
+  background-color: white;
+  transform: scale(1.05);
+  border: 1px solid #aaeafd;
+  border-left: 0.5rem solid #aaeafd;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .textListTodo {
   text-align: center;
   font-size: 1.5rem;
   font-weight: 500;
+}
+
+.minIcon,
+.pencilIcon {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 1rem;
+  padding: 1rem;
+  border-radius: 50%;
+  box-shadow: 0px 0px 24px 9px #f0f3f4;
+  background: white;
+  color: #5ac8f4;
+  display: none;
 }

@@ -3,7 +3,7 @@ import { TodoType } from "../types";
 
 interface IHandleRemove {
   setTodos: React.Dispatch<React.SetStateAction<TodoType[]>>;
-  id: number;
+  id: string;
 }
 
 export const handleRemove = ({ id, setTodos }: IHandleRemove) => {

@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  width: 20rem;
+  width: 30rem;
   align-items: center;
   margin: 0 auto;
   box-shadow: 0px 0px 24px 9px #aaeafd;
@@ -39,8 +39,15 @@ ul {
   width: 100%;
 }
 
+.divInput {
+  width: 100%;
+  padding: 2rem;
+}
+
 .inputTodolist {
   width: 80%;
+  display: flex;
+  margin: 0 auto;
   outline: none;
   padding: 0.5rem;
   border: 1px solid #aaeafd;
@@ -49,12 +56,12 @@ ul {
 
 .iconPlus {
   position: absolute;
-  padding: 1rem;
+  padding: 1.5rem;
   border-radius: 100%;
   box-shadow: 0px 0px 24px 9px #f0f3f4;
   background: white;
   color: #5ac8f4;
   left: 50%;
-  bottom: -3rem;
+  bottom: -4rem;
   transform: translate(-50%, -50%);
 }

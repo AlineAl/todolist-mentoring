@@ -11,7 +11,6 @@ export default function Todolist() {
   const [value, setValue] = React.useState<string>("");
   const [todos, setTodos] = React.useState<TodoType[]>([]);
   const [open, setOpen] = React.useState<boolean>(false);
-  const [openInput, setOpenInput] = React.useState<boolean>(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
@@ -23,23 +22,21 @@ export default function Todolist() {
         <h1>{new Intl.DateTimeFormat("fr-FR").format(new Date(Date.now()))}</h1>
       </div>
       <div className={style.inputContainer}>
-        {openInput && (
+        <div className={style.divInput}>
           <input
             className={style.inputTodolist}
             type="text"
             id="text"
             name="text"
+            placeholder="Ajouter une tâche"
             value={value}
             onChange={handleChange}
           />
-        )}
+        </div>
 
         <ImPlus
           className={style.iconPlus}
-          onClick={() => {
-            setOpenInput(!openInput);
-            openInput && handleAdd({ setTodos, value, setValue });
-          }}
+          onClick={() => handleAdd({ setTodos, value, setValue })}
         />
       </div>
 

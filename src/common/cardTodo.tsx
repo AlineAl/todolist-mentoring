@@ -8,8 +8,8 @@ interface ICardTodo {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   open: boolean;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleRemove: (id: number) => void;
-  handleUpdate: (id: number, content: string, open: boolean) => void;
+  handleRemove: (id: string) => void;
+  handleUpdate: (id: string, content: string, open: boolean) => void;
   value: string;
 }
 
@@ -22,24 +22,32 @@ export default function CardTodo({
   handleUpdate,
   value,
 }: ICardTodo) {
-  const [todoId, setTodoId] = useState<number>(0);
+  const [todoId, setTodoId] = useState<string>("");
 
   useEffect(() => {
     if (!open) {
-      setTodoId(0);
+      setTodoId("");
     }
   }, [open]);
 
   return (
     <li className={style.listContainer}>
-      <span className={style.textListTodo}>{todo.content}</span>
-      {/*      <ImMinus className={style.minIcon} onClick={() => handleRemove(todo.id)} />
-      <ImPencil2
-        onClick={() => {
-          setTodoId(todo.id);
-          setOpen(!open);
-        }}
-      />*/}
+      <div className={style.flex}>
+        <span className={style.textListTodo}>{todo.content}</span>
+        <div className={style.flex}>
+          <div onClick={() => handleRemove(todo.id)} className={style.minIcon}>
+            <ImMinus />
+          </div>
+          <div className={style.pencilIcon}>
+            <ImPencil2
+              onClick={() => {
+                setTodoId(todo.id);
+                setOpen(!open);
+              }}
+            />
+          </div>
+        </div>
+      </div>
       {open && todoId === todo.id ? (
         <>
           <input type="text" id="update" name="update" value={value} onChange={handleChange} />
