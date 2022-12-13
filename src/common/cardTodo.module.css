@@ -1,0 +1,16 @@
+.listContainer {
+  list-style: none;
+  border-bottom: 1px solid #aaeafd;
+  width: 100%;
+  padding: 2rem 1rem;
+}
+
+.listContainer:last-child {
+  border-bottom: none;
+}
+
+.textListTodo {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+}

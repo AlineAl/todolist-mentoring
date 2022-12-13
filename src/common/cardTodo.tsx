@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ImMinus, ImPencil2 } from "react-icons/im";
 import { TodoType } from "../types";
-import style from "../components/Todolist/todolist.module.css";
+import style from "./cardTodo.module.css";
 
 interface ICardTodo {
   todo: TodoType;
@@ -31,15 +31,15 @@ export default function CardTodo({
   }, [open]);
 
   return (
-    <li>
-      <span>{todo.content}</span>
-      <ImMinus className={style.minIcon} onClick={() => handleRemove(todo.id)} />
+    <li className={style.listContainer}>
+      <span className={style.textListTodo}>{todo.content}</span>
+      {/*      <ImMinus className={style.minIcon} onClick={() => handleRemove(todo.id)} />
       <ImPencil2
         onClick={() => {
           setTodoId(todo.id);
           setOpen(!open);
         }}
-      />
+      />*/}
       {open && todoId === todo.id ? (
         <>
           <input type="text" id="update" name="update" value={value} onChange={handleChange} />
