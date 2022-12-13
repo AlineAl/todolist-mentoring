@@ -4,23 +4,23 @@ import { TodoType } from "../types";
 import style from "../components/Todolist/todolist.module.css";
 
 interface ICardTodo {
-  el: TodoType;
+  todo: TodoType;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   open: boolean;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleRemove: (id: number) => void;
   handleUpdate: (id: number, content: string, open: boolean) => void;
-  todo: string;
+  value: string;
 }
 
 export default function CardTodo({
-  el,
+  todo,
   setOpen,
   open,
   handleChange,
   handleRemove,
   handleUpdate,
-  todo,
+  value,
 }: ICardTodo) {
   const [todoId, setTodoId] = useState<number>(0);
 
@@ -31,21 +31,21 @@ export default function CardTodo({
   }, [open]);
 
   return (
-    <li key={el.id}>
-      <span>{el.content}</span>
-      <ImMinus className={style.minIcon} onClick={() => handleRemove(el.id)} />
+    <li>
+      <span>{todo.content}</span>
+      <ImMinus className={style.minIcon} onClick={() => handleRemove(todo.id)} />
       <ImPencil2
         onClick={() => {
-          setTodoId(el.id);
+          setTodoId(todo.id);
           setOpen(!open);
         }}
       />
-      {open && todoId === el.id ? (
+      {open && todoId === todo.id ? (
         <>
-          <input type="text" id="update" name="update" value={todo} onChange={handleChange} />
+          <input type="text" id="update" name="update" value={value} onChange={handleChange} />
           <button
             onClick={() => {
-              handleUpdate(el.id, todo, false);
+              handleUpdate(todo.id, value, false);
               setOpen(false);
             }}
           >

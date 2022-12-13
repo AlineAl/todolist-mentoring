@@ -2,14 +2,13 @@ import React from "react";
 import { TodoType } from "../types";
 
 interface IHandleAdd {
-  array: TodoType[];
-  setArray: React.Dispatch<React.SetStateAction<TodoType[]>>;
-  setTodo: React.Dispatch<React.SetStateAction<string>>;
-  todo: string;
+  setTodos: React.Dispatch<React.SetStateAction<TodoType[]>>;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
+  value: string;
 }
 
-export const handleAdd = ({ array, setArray, setTodo, todo }: IHandleAdd) => {
-  const id = array.length;
-  setArray([...array, { content: todo, id: id + 1 }]);
-  setTodo("");
+export const handleAdd = ({ setTodos, setValue, value }: IHandleAdd) => {
+  const id = Math.floor(Math.random());
+  setTodos((todos) => [...todos, { content: value, id }]);
+  setValue("");
 };

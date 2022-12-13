@@ -8,36 +8,54 @@ import { handleUpdate } from "../../handlers/handleUpdate";
 import { handleRemove } from "../../handlers/handleRemove";
 
 export default function Todolist() {
-  const [todo, setTodo] = React.useState<string>("");
-  const [array, setArray] = React.useState<TodoType[]>([]);
+  const [value, setValue] = React.useState<string>("");
+  const [todos, setTodos] = React.useState<TodoType[]>([]);
   const [open, setOpen] = React.useState<boolean>(false);
+  const [openInput, setOpenInput] = React.useState<boolean>(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.target.value.length > 0 ? setTodo(e.target.value) : setTodo("");
+    setValue(e.target.value);
   };
 
   return (
     <div className={style.container}>
-      <h1>Todo List</h1>
+      <div className={style.title}>
+        <h1>{new Intl.DateTimeFormat("fr-FR").format(new Date(Date.now()))}</h1>
+      </div>
       <div className={style.inputContainer}>
-        <input type="text" id="text" name="text" value={todo} onChange={handleChange} />
-        <ImPlus onClick={() => handleAdd({ array, setArray, todo, setTodo })} />
+        {openInput && (
+          <input
+            className={style.inputTodolist}
+            type="text"
+            id="text"
+            name="text"
+            value={value}
+            onChange={handleChange}
+          />
+        )}
+
+        <ImPlus
+          className={style.iconPlus}
+          onClick={() => {
+            setOpenInput(!openInput);
+            openInput && handleAdd({ setTodos, value, setValue });
+          }}
+        />
       </div>
 
       <ul>
-        {array?.map((el) => {
-          return (
-            <CardTodo
-              el={el}
-              setOpen={setOpen}
-              open={open}
-              handleChange={handleChange}
-              handleRemove={() => handleRemove({ id: el.id, setArray, array })}
-              handleUpdate={() => handleUpdate({ array, id: el.id, value: todo, setArray })}
-              todo={todo}
-            />
-          );
-        })}
+        {todos?.map((todo) => (
+          <CardTodo
+            key={todo.id}
+            todo={todo}
+            setOpen={setOpen}
+            open={open}
+            handleChange={handleChange}
+            handleRemove={() => handleRemove({ id: todo.id, setTodos })}
+            handleUpdate={() => handleUpdate({ id: todo.id, value, setTodos })}
+            value={value}
+          />
+        ))}
       </ul>
     </div>
   );

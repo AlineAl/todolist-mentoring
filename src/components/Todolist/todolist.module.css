@@ -1,32 +1,54 @@
 .container {
   display: flex;
   flex-direction: column;
+  width: 20rem;
   align-items: center;
   margin: 0 auto;
+  box-shadow: 0px 0px 24px 9px #aaeafd;
+  border-radius: 0.5rem;
+  position: relative;
+}
+
+.title {
+  width: 100%;
+  border-radius: 0.5rem 0.5rem 0 0;
+  background: linear-gradient(
+    90deg,
+    rgba(49, 227, 245, 1) 0%,
+    rgba(55, 211, 243, 1) 41%,
+    rgba(78, 185, 242, 1) 100%
+  );
+}
+
+h1 {
+  text-align: center;
+  color: white;
 }
 
 .inputContainer {
   display: flex;
+  flex-direction: column;
   align-items: center;
+  width: 100%;
+  margin-top: 1rem;
 }
 
-input {
-  margin-right: 1rem;
-}
-
-.inputUpdate {
-  border: none;
+.inputTodolist {
+  width: 80%;
   outline: none;
+  padding: 0.5rem;
+  border: 1px solid #aaeafd;
+  border-radius: 1rem;
 }
 
-ul {
-  padding: 0;
-}
-
-ul > li {
-  list-style: none;
-}
-
-.minIcon {
-  margin: 0 1rem;
+.iconPlus {
+  position: absolute;
+  padding: 1rem;
+  border-radius: 100%;
+  box-shadow: 0px 0px 24px 9px #f0f3f4;
+  background: white;
+  color: #5ac8f4;
+  left: 50%;
+  bottom: -3rem;
+  transform: translate(-50%, -50%);
 }
