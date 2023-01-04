@@ -1,0 +1,92 @@
+.container {
+  border: 1px solid gray;
+  width: 28rem;
+  margin: 0 auto;
+  border-radius: 1rem;
+}
+
+img {
+  display: flex;
+  margin: 2rem auto;
+  width: 3rem;
+  height: 3rem;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.inputContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input {
+  width: 20rem;
+  height: 2rem;
+  padding: 0.3rem;
+  border: 1px solid #ef82ac;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  outline: none;
+}
+
+.iconPlus {
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: #ef82ac;
+  padding: 1rem;
+  border-radius: 50%;
+  color: white;
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.iconPlus:hover {
+  background-color: white;
+  color: #ef82ac;
+  border: 1px solid #ef82ac;
+}
+
+.card {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem auto;
+  background-color: #f99f50;
+  color: white;
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+.date {
+  width: 8rem;
+  background-color: #fbca9e;
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+  text-align: center;
+  font-weight: bold;
+  font-size: 0.8rem;
+  color: #473d7b;
+}
+
+p {
+  margin: 0;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.iconCard {
+  font-size: 1.3rem;
+  margin-right: 1rem;
+}
+
+.iconArrowDown {
+  display: flex;
+  font-size: 1.3rem;
+  margin: 0 auto;
+}
