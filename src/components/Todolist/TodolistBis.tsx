@@ -50,6 +50,11 @@ export default function TodolistBis() {
         </div>
         <ImCircleDown className={style.iconArrowDown} />
       </div>
+      <ul className={style.listContainer}>
+        <li>Landing page wireframe</li>
+        <li>Survey users</li>
+        <li>Design feedback</li>
+      </ul>
 
       {/*      <ul>
         {todos?.map((todo) => (

@@ -4,7 +4,6 @@ import { ImPlus } from "react-icons/im";
 import { TodoType } from "../../types";
 import CardTodo from "../../common/CardTodo";
 import { handleAdd } from "../../handlers/handleAdd";
-import { handleUpdate } from "../../handlers/handleUpdate";
 import { handleRemove } from "../../handlers/handleRemove";
 
 export default function Todolist() {
@@ -35,6 +34,9 @@ export default function Todolist() {
 
         <ImPlus
           className={style.iconPlus}
+          onKeyUp={(e) => {
+            e.key === "Enter" && handleAdd({ setTodos, value, setValue });
+          }}
           onClick={() => handleAdd({ setTodos, value, setValue })}
         />
       </div>

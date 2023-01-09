@@ -52,7 +52,7 @@ input {
   width: 90%;
   display: flex;
   flex-direction: column;
-  margin: 0.5rem auto;
+  margin: 0rem auto;
   background-color: #f99f50;
   color: white;
   border-radius: 1rem;
@@ -89,4 +89,20 @@ p {
   display: flex;
   font-size: 1.3rem;
   margin: 0 auto;
+}
+
+.listContainer {
+  background-color: #f4d4b7;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+  width: 80%;
+}
+
+.listContainer > li {
+  list-style: none;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #473d7b;
 }
