@@ -1,28 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { ImMinus, ImPencil2 } from "react-icons/im";
+import { handleUpdate } from "../handlers/handleUpdate";
 import { TodoType } from "../types";
 import style from "./cardTodo.module.css";
 
 interface ICardTodo {
+  setTodos: React.Dispatch<React.SetStateAction<TodoType[]>>;
   todo: TodoType;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  open: boolean;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleRemove: (id: string) => void;
-  handleUpdate: (id: string, content: string, open: boolean) => void;
-  value: string;
 }
 
-export default function CardTodo({
-  todo,
-  setOpen,
-  open,
-  handleChange,
-  handleRemove,
-  handleUpdate,
-  value,
-}: ICardTodo) {
+export default function CardTodo({ todo, handleRemove, setTodos }: ICardTodo) {
   const [todoId, setTodoId] = useState<string>("");
+  const [open, setOpen] = useState<boolean>(false);
+  const [updateValue, setUpdateValue] = useState<string>(todo.content);
 
   useEffect(() => {
     if (!open) {
@@ -50,10 +41,16 @@ export default function CardTodo({
       </div>
       {open && todoId === todo.id ? (
         <>
-          <input type="text" id="update" name="update" value={value} onChange={handleChange} />
+          <input
+            type="text"
+            id="update"
+            name="update"
+            value={updateValue}
+            onChange={(e) => setUpdateValue(e.target.value)}
+          />
           <button
             onClick={() => {
-              handleUpdate(todo.id, value, false);
+              handleUpdate({ id: todo.id, value: updateValue, setTodos });
               setOpen(false);
             }}
           >

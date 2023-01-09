@@ -10,7 +10,6 @@ import { handleRemove } from "../../handlers/handleRemove";
 export default function Todolist() {
   const [value, setValue] = React.useState<string>("");
   const [todos, setTodos] = React.useState<TodoType[]>([]);
-  const [open, setOpen] = React.useState<boolean>(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
@@ -45,12 +44,8 @@ export default function Todolist() {
           <CardTodo
             key={todo.id}
             todo={todo}
-            setOpen={setOpen}
-            open={open}
-            handleChange={handleChange}
+            setTodos={setTodos}
             handleRemove={() => handleRemove({ id: todo.id, setTodos })}
-            handleUpdate={() => handleUpdate({ id: todo.id, value, setTodos })}
-            value={value}
           />
         ))}
       </ul>
