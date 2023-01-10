@@ -9,4 +9,5 @@ export type TodoBisType = {
   isLiked: boolean;
   date: Date;
   subTodo: TodoType[];
+  category: string;
 };

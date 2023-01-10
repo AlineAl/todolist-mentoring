@@ -12,7 +12,7 @@ export const handleAdd = ({ setTodos, setValue, value }: IHandleAdd) => {
   const id = uuidv4();
   setTodos((todos) => [
     ...todos,
-    { id, content: value, isLiked: false, date: new Date(), subTodo: [] },
+    { id, content: value, isLiked: false, date: new Date(), subTodo: [], category: "" },
   ]);
   setValue("");
 };
